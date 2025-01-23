@@ -109,6 +109,11 @@ jobs:
       upstream-repository-id: ${{ env.UPSTREAM_REPOSITORY_ID }}
 
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+      with:
+        egress-policy: audit
+
     - name: Switch to using Python 3.13 by default
       # yamllint disable-line rule:line-length
       uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5.3.0
@@ -274,6 +279,11 @@ jobs:
       dists-base64-hash: ${{ steps.dist-hashes.outputs.combined-hash }}
 
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+      with:
+        egress-policy: audit
+
     - name: Switch to using Python 3.13
       # yamllint disable-line rule:line-length
       uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5.3.0
@@ -522,8 +532,13 @@ jobs:
     timeout-minutes: 1
 
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+      with:
+        egress-policy: audit
+
     - name: Decide whether the needed jobs succeeded or failed
-      uses: re-actors/alls-green@release/v1
+      uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe # release/v1
       with:
         jobs: ${{ toJSON(needs) }}
 
