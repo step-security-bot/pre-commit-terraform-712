@@ -147,6 +147,11 @@ jobs:
       TOXENV: ${{ inputs.toxenv }}
 
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+      with:
+        egress-policy: audit
+
     - name: Export requested job-global environment variables
       if: inputs.environment-variables != ''
       run: >-
@@ -175,7 +180,7 @@ jobs:
     - name: Retrieve the project source from an sdist inside the GHA artifact
       if: >-
         !contains(fromJSON('["pre-commit", "spellcheck-docs"]'), inputs.toxenv)
-      uses: re-actors/checkout-python-sdist@release/v2
+      uses: re-actors/checkout-python-sdist@187f55296b0f54d88259aaaf99af32ad3647d3bc # release/v2
       with:
         source-tarball-name: ${{ inputs.source-tarball-name }}
         workflow-artifact-name: ${{ inputs.dists-artifact-name }}

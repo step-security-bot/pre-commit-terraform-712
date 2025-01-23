@@ -143,3 +143,11 @@ repos:
   - id: prettier
     # https://prettier.io/docs/en/options.html#parser
     files: .json5$
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.16.3
+  hooks:
+  - id: gitleaks
+- repo: https://github.com/pylint-dev/pylint
+  rev: v2.17.2
+  hooks:
+  - id: pylint
